@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Templating Engine</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/better.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+				<h1>Templating</h1>
+				<p>Thomas Ongeri</p>
+				</section>
+				<section>
+					<h3>What is a templating engines?</h3>
+					<p>A template engine enables you to use static template files in your application. At runtime, the template engine replaces variables in a template file with actual values, and transforms the template into an HTML file sent to the client.</p>
+				</section>
+				<section>
+					<h3>What are some templating engines?</h3>
+					<div class="logos">
+						<img class="fragment fade-up" src="https://mobomo.s3.amazonaws.com/uploads/2015/09/thumb6.jpg" alt=""/>
+						<img class="fragment fade-up" src="http://www.kelleyhoefer.com/images/ejs.png" alt="EJS"/>
+						<img class="fragment fade-up" src="https://www.logolynx.com/images/logolynx/71/7124cb7d030704b3333a73eaf5402cf3.png" alt="Handlebars"/>
+						<img class="fragment fade-up" src="https://cdn.worldvectorlogo.com/logos/pugpugjs.svg" alt="PUG"/>
+						<img class="fragment fade-up" src="https://olado.github.io/doT/doT-js-100@2x.png" alt="Dot"/>
+						<img class="fragment fade-up" src="https://railsware.com/blog/wp-content/uploads/2012/04/mustache-150x150.png" alt=""/>
+					</div>
+				</section>
+				<section>
+					<h3><a href="https://garann.github.io/template-chooser/" target="_blank">So you need a templating engine?</a></h3>
+				</section>
+				<section>
+					<h3>Most popular engines</h3>
+					<img class="fragment fade-in" src="https://www.thomasongeri.com/better.png" alt="Better"/>
+					<p class="fragment fade-in">WINNER IS: Handlebars & Pug | 31% | 5 votes</p>
+				</section>
+				<section>
+					<h5>Most popular engines</h5>
+					<img class="fragment fade-in" style="width:43%" src="https://www.thomasongeri.com/outside.png" alt="Better"/>
+					<p class="fragment fade-in">WINNER IS: 1. Handlebars - 25 votes |  2. PUG 15 votes</p>
+				</section>
+				<section>
+					<h3>Discuss: Why do we use them?</h3>
+					<img style="width: 30%" src="https://i.imgur.com/yNlQWRM.jpg" />
+				</section>
+				<section>
+					<h3>Why do we use them?</h3>
+					<ul>
+						<li class="fragment fade-up">Easy to read</li>
+						<li class="fragment fade-up">Write less markup</li>
+						<li class="fragment fade-up">Helps to remove business logic from the view</li>
+						<li class="fragment fade-up">Does one thing really great (rendering of html)</li>
+						<li class="fragment fade-up">Allows designers to create templates</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Discuss: Any Drawbacks?</h3>
+				</section>
+				<section>
+					<h2>Any Drawbacks?</h2>
+					<ul>
+						<li class="fragment fade-up">Complexity</li>
+						<li class="fragment fade-up">Social Cost</li>
+						<li class="fragment fade-up">Loss of tooling</li>
+					</ul>
+				</section>
+
+				<section><h2>Code time</h2></section>
+				<section>
+				<h2>What does this do?</h2>
+				<pre>
+				<code data-trim>
+				<div class="price-container">
+				 <ul $if="items.length > 0">
+				  <li $loop="items">
+				   ${items.price >> formatCurrency}
+				  </li>
+				 </ul>
+				<p $:else> No items found.</p>
+				</div>
+				</code>
+				</pre>
+				</section>
+				<section>
+				<h2>What does this do?</h2>
+				<pre>
+				<code data-trim>
+					function renderPrices(items) {
+						return div({className: 'list'}),
+						items.length
+							? ul(items.map(item => 
+								li(formatCurrency(items.price))
+							))
+							: p('No items found')
+						)
+					}
+				</code>
+				</pre>
+				</section>
+				<section>
+				<h3>Discussion...</h3>
+				</section>
+				<section>
+				<h4>What if we wanted to add logic for zeros (priceWithZeros)?</h4>
+				<pre>
+				<code data-trim>
+				<div class="price-container">
+				 <ul $if="items.length > 0">
+				  <li $loop="items">
+					${items.price >> formatCurrency}
+				  </li>
+				 </ul>
+				<p $:else> No items found.</p>
+				</div>
+				</code>
+				</pre>
+				</section>
+
+				<section>
+				<h2>What if we wanted to add logic for zeros (priceWithZeros)?</h2>
+				<pre>
+				<code data-trim>
+					function renderPrices(items) {
+						return div({className: 'list'}),
+						items.length
+							? ul(items.map(item => 
+								li(formatCurrency(items.price))
+							))
+							: p('No items found')
+						)
+					}
+				</code>
+				</pre>
+				</section>
+				
+				<section>
+					<h3>Which to chose?</h3>
+					<div class="logos">
+						<span class="fragment fade-in">
+							<img class="fragment fade-out" src="https://mobomo.s3.amazonaws.com/uploads/2015/09/thumb6.jpg" alt="" />
+						</span>
+
+						<span class="fragment fade-in">
+							<img class="fragment fade-out" src="http://www.kelleyhoefer.com/images/ejs.png" alt="EJS" />
+						</span>
+
+						<span class="fragment fade-in">
+							<img class="fragment fade-out" src="https://www.logolynx.com/images/logolynx/71/7124cb7d030704b3333a73eaf5402cf3.png" alt="Handlebars" />
+						</span>
+
+						<span class="fragment fade-in">
+							<img class="fragment fade-out" src="https://cdn.worldvectorlogo.com/logos/pugpugjs.svg" alt="PUG" />
+						</span>
+
+						<span class="fragment fade-in">
+							<img class="fragment fade-out" src="https://olado.github.io/doT/doT-js-100@2x.png" alt="Dot" />
+						</span>
+
+						<span class="fragment fade-in">
+							<img class="fragment fade-out" src="https://railsware.com/blog/wp-content/uploads/2012/04/mustache-150x150.png" alt="" />
+						</span>
+					</div>
+				</section>
+				<section>
+					<h3>And the winner is</h3>
+					<img class="fragment fade-up" src="https://cdn-images-1.medium.com/max/1600/1*-ty7aZqH2of-rXpWYaoKPQ.png" />
+				</section>
+				<section><h3>Discussion</h3></section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
